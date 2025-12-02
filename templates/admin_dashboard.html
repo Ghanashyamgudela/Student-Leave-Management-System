@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Leave Management</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .card-hover:hover {
+            transform: scale(1.02);
+            transition: 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <a class="navbar-brand" href="/admin/dashboard">Admin Panel</a>
+        <div class="ms-auto">
+            <a href="{{ url_for('admin_reports') }}" class="btn btn-light btn-sm">Reports</a> 
+<a href="{{ url_for('admin_view_students') }} " class="btn btn-light btn-sm">View Students</a> 
+<a href="{{ url_for('admin_requests') }}" class="btn btn-light btn-sm">View Leave Requests</a> 
+            <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+
+        <h3 class="mb-4">Welcome, Admin</h3>
+
+        <div class="row g-4">
+
+            <!-- View Leave Requests Card -->
+            <div class="col-md-4">
+                <a href="/admin/requests" style="text-decoration: none;">
+                    <div class="card shadow card-hover p-4 text-center">
+                        <h4>Leave Requests</h4>
+                        <p>View and manage student leave requests</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- View Students Card -->
+            <div class="col-md-4">
+                <a href="/admin/students" style="text-decoration: none;">
+                    <div class="card shadow card-hover p-4 text-center">
+                        <h4>Students</h4>
+                        <p>View all registered students</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Reports Card -->
+            <div class="col-md-4">
+                <a href="/admin/reports" style="text-decoration: none;">
+                    <div class="card shadow card-hover p-4 text-center">
+                        <h4>Reports</h4>
+                        <p>Generate leave reports and statistics</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

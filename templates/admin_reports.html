@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Reports</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin: auto; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        h2, h3 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Admin Leave Reports</h2>
+
+    <h3>Overall Summary</h3>
+    <table>
+        <tr>
+            <th>Total Requests</th>
+            <th>Approved</th>
+            <th>Rejected</th>
+            <th>Pending</th>
+        </tr>
+        <tr>
+            <td>{{ total }}</td>
+            <td>{{ approved }}</td>
+            <td>{{ rejected }}</td>
+            <td>{{ pending }}</td>
+        </tr>
+    </table>
+
+    <h3>Summary Per Student</h3>
+    <table>
+        <tr>
+            <th>Student Name</th>
+            <th>Total Leaves</th>
+            <th>Approved</th>
+            <th>Rejected</th>
+            <th>Pending</th>
+        </tr>
+        {% for student in student_summary %}
+        <tr>
+            <td>{{ student.full_name }}</td>
+            <td>{{ student.total_leaves }}</td>
+            <td>{{ student.approved }}</td>
+            <td>{{ student.rejected }}</td>
+            <td>{{ student.pending }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>
