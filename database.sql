@@ -85,4 +85,9 @@ INSERT INTO admin (username, password) VALUES ('admin@gmail.com', 'admin1234');
 
 select * from student;
 
+use student;
+ALTER TABLE student
+  ADD COLUMN is_verified BOOLEAN DEFAULT 0,
+  ADD COLUMN verification_token VARCHAR(255);
+SELECT email, is_verified FROM student;
 
