@@ -5,19 +5,54 @@
     <title>My Leaves</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #f2f2f2; }
+        body { font-family: Arial, sans-serif; margin: 20px;
+        background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        
+     }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px;
+        border: 3px solid green; }
+        th, td { border: 1px solid green; padding: 10px; text-align: center; }
+        th { background-color: #e35858; }
         tr:nth-child(even) { background-color: #f9f9f9; }
         a { text-decoration: none; color: #007BFF; }
         a:hover { text-decoration: underline; }
+        .shine-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+        }
+        @keyframes shine {
+            0% { left: -80px; }
+            40%,100% { left: calc(100% + 20px); }
+        }
+        .button-teal {
+            background: linear-gradient(135deg, #1de9b6 0%, #1dc8e9 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(29,233,182,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-teal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(29,233,182,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
     </style>
 </head>
 <body>
     <h2>My Leave Requests</h2>
 
-    <a href="{{ url_for('student_dashboard') }}">Back to Dashboard</a>
+    <a href="{{ url_for('student_dashboard') }}" class="shine-button button-teal" style="padding: 10px 24px; border-radius: 6px; margin-bottom: 16px; display: inline-block;">Back to Dashboard</a>
     <table>
         <thead>
             <tr>
