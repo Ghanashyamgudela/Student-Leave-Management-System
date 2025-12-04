@@ -3,10 +3,52 @@
 <head>
     <title>All Students</title>
     <style>
+        body{
+background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);        background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            
+        }
         table { border-collapse: collapse; width: 80%; margin: auto; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th, td { border: 2px solid white; padding: 8px; text-align: center; }
         th { background-color: #f2f2f2; }
         h2 { text-align: center; }
+        .shine-button {
+            position: relative;
+            overflow: hidden !important;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 12px;
+            padding: 8px 24px;
+            min-width: 120px;
+            text-align: center;
+        }
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+            pointer-events: none;
+            border-radius: 12px;
+        }
+        @keyframes shine {
+            0% { left: -80px; }
+            40%,100% { left: calc(100% + 20px); }
+        }
+        .button-lime {
+            background: linear-gradient(135deg, #b4ec51 0%, #429321 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(180,236,81,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-lime:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(180,236,81,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
     </style>
 </head>
 <body>
@@ -26,7 +68,7 @@
         {% endfor %}
     </table>
     <div style="text-align:center; margin-top:20px;">
-        <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+        <a href="{{ url_for('admin_dashboard') }}" class="shine-button button-lime" style="padding: 10px 24px; border-radius: 6px; text-decoration: none;">Back to Dashboard</a>
     </div>
 </body>
 </html>
