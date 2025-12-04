@@ -8,16 +8,73 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+        body{
+           background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        }
+        .shine-button {
+            position: relative;
+            overflow: hidden;
+            
+        }
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+        }
+        @keyframes shine {
+            0% { left: -80px; }
+            40%,100% { left: calc(100% + 20px); }
+        }
+        .button-orange {
+            background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(247,151,30,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-orange:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(247,151,30,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .button-green {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            
+            box-shadow: 0 10px 30px rgba(67,233,123,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(67,233,123,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        #info {
+            color: blueviolet;
+
+        }
+        .shadow{
+            background-color: inherit;
+             background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border: 2px white solid;
+            backdrop-filter: blur(10px)
+           
+
+        }
+    </style>
+
 </head>
 <body class="bg-light">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success px-3">
         <a class="navbar-brand" href="/student/dashboard">Student Portal</a>
         <div class="ms-auto">
-            <a href="#">
-                {{ student.full_name }}</a>
-            <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+            <a href="/student/profile" id="info" class="btn shine-button button-green mx-3 btn-sm">Hello, {{ student.full_name }}</a>
+            <a href="/logout" id="info" class="btn shine-button button-green btn-sm">Logout</a>
         </div>
     </nav>
 
@@ -52,7 +109,7 @@
                     <input type="date" name="to_date" id="to_date" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Submit Leave Request</button>
+                <button type="submit" class="btn shine-button button-orange w-100">Submit Leave Request</button>
 
                 <a href="/student/dashboard" class="btn btn-secondary w-100 mt-2">Back to Dashboard</a>
 
