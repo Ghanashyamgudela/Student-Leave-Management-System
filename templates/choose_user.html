@@ -67,6 +67,15 @@ background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 23
     0 15px 40px rgba(17, 153, 142, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
+.button-cyan {
+  background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0,198,255,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.button-cyan:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,198,255,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+}
     </style>
 </head>
 <body>
@@ -75,7 +84,7 @@ background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 23
     <h2>Choose the user</h2>
     <div>
         <form action="{{ url_for('login') }}">
-            <button class="shine-button button-emerald" type="submit">Student</button>
+            <button class="shine-button button-cyan" type="submit">Student</button>
         </form>
         <form action="{{ url_for('admin_login') }}">
             <button class="shine-button button-emerald" type="submit">Admin</button>
