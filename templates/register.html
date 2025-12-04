@@ -8,10 +8,56 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+        body{
+            background-image: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .shadow{
+            background: inherit;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+
+        }
+        .text-center a{
+            text-decoration: none!important;
+        }
+        .shine-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+        }
+        @keyframes shine {
+            0% { left: -80px; }
+            40%,100% { left: calc(100% + 20px); }
+        }
+        .button-blue {
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(33,147,176,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-blue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(33,147,176,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+    </style>
+
 </head>
 <body class="bg-light">
 
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div id="e" class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
 
         <div class="card shadow p-4" style="width: 400px; border-radius: 12px;">
 
@@ -43,10 +89,10 @@
                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Register</button>
+                <button type="submit" class="btn shine-button button-blue w-100">Register</button>
 
                 <div class="text-center mt-2">
-                    Already have an account? <a href="/">Login</a>
+                    Already have an account? <a href="/login">Login</a>
                 </div>
 
             </form>
