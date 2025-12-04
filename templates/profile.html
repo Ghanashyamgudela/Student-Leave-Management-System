@@ -5,14 +5,50 @@
     <title>My Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .profile-container { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        body { 
+            background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif; margin: 20px; }
+        .profile-container { max-width: 500px;
+            
+            margin-top: 120px;
+            margin-left: 520px;  padding: 20px; border: 2px solid white; border-radius: 10px; }
         h2 { text-align: center; }
         table { width: 100%; margin-top: 20px; }
         th, td { text-align: left; padding: 8px; }
         th { width: 40%; }
         a { display: inline-block; margin-top: 20px; color: #007BFF; text-decoration: none; }
         a:hover { text-decoration: underline; }
+        .shine-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+        }
+        @keyframes shine {
+            0% { left: -80px; }
+            40%,100% { left: calc(100% + 20px); }
+        }
+        .button-pink {
+            background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(255,106,136,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-pink:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,106,136,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
     </style>
 </head>
 <body>
@@ -32,3 +68,11 @@
                 <td>{{ student.email }}</td>
             </tr>
             <tr>
+                <td>
+                    <a href="{{ url_for('student_dashboard') }}" class="shine-button button-pink" style="padding: 10px 20px; border-radius: 6px; text-decoration: none;">Back to Dashboard</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
