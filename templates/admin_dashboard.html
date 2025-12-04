@@ -9,9 +9,68 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        body{
+
+background-image: linear-gradient(to top, #fcc5e4 0%, #fda34b 15%, #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%);background-image: linear-gradient(to top, #4fb576 0%, #44c489 30%, #28a9ae 46%, #28a2b7 59%, #4c7788 71%, #6c4f63 86%, #432c39 100%);            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            
+            background-size: cover;
+        }
+        .shine-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+        }
+        @keyframes shine {
+            0% { left: -80px; }
+            40%,100% { left: calc(100% + 20px); }
+        }
+        .button-red {
+            background: linear-gradient(135deg, #41a05e 0%, #a09a92 100%);
+            color: black;
+            box-shadow: 0 10px 30px rgba(255,88,88,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-red:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,88,88,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .button-green {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(67,233,123,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(67,233,123,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .button-blue {
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(33,147,176,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-blue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(33,147,176,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
         .card-hover:hover {
             transform: scale(1.02);
             transition: 0.2s;
+        }
+        .row .shadow {
+            background-color: inherit;
+            backdrop-filter: blur(10px);
+            border: 2px white solid;
         }
     </style>
 </head>
@@ -21,10 +80,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         <a class="navbar-brand" href="/admin/dashboard">Admin Panel</a>
         <div class="ms-auto">
-            <a href="{{ url_for('admin_reports') }}" class="btn btn-light btn-sm">Reports</a> 
-<a href="{{ url_for('admin_view_students') }} " class="btn btn-light btn-sm">View Students</a> 
-<a href="{{ url_for('admin_requests') }}" class="btn btn-light btn-sm">View Leave Requests</a> 
-            <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+            <a href="{{ url_for('admin_reports') }}" class="btn shine-button button-red btn-sm mx-2">Reports</a> 
+<a href="{{ url_for('admin_view_students') }} " class="btn shine-button button-red btn-sm mx-2">View Students</a> 
+<a href="{{ url_for('admin_requests') }}" class="btn shine-button button-red btn-sm mx-2">View Leave Requests</a> 
+            <a href="/logout" class="btn shine-button button-red btn-sm mx-2">Logout</a>
         </div>
     </nav>
 
