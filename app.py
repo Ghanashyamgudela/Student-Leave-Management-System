@@ -25,16 +25,44 @@ def register():
             flash("Email already registered! Please login.")
             return redirect('/register')
 
-        # Correct insert: do NOT include student_id
-        cur.execute("INSERT INTO student(full_name, email, password) VALUES (%s, %s, %s)",
-                    (name, email, password))
+        # Generate token
+        import secrets, smtplib
+        from email.mime.text import MIMEText
+        token = secrets.token_urlsafe(32)
+
+        # Insert into DB
+        cur.execute("""
+            INSERT INTO student (full_name, email, password, is_verified, verification_token)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (name, email, password, 0, token))
         mysql.connection.commit()
 
-        flash("Registration successful! Please login.")
-        return redirect('/')
-    
-    return render_template('register.html')
+        # Prepare verification email
+        verify_url = request.url_root.rstrip('/') + '/verify/' + token
+        subject = "Verify Your Account"
+        body = f"Hello {name},\n\nClick the link below to verify your account:\n{verify_url}\n\nThank you!"
 
+        msg = MIMEText(body)
+        msg['Subject'] = subject
+        msg['From'] = app.config['MAIL_USER']
+        msg['To'] = email
+
+        # Send email
+        try:
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(app.config['MAIL_USER'], app.config['MAIL_PASS'])
+            server.sendmail(msg['From'], [msg['To']], msg.as_string())
+            server.quit()
+
+            flash("Registration successful! Please check your email for verification link.")
+        except Exception as e:
+            print("EMAIL ERROR:", e)
+            flash(f"Error sending verification email: {e}")
+
+        return redirect('/login')
+
+    return render_template('register.html')
 
 # ---------------- STUDENT LOGIN ----------------
 @app.route('/login', methods=['GET', 'POST'])
@@ -43,18 +71,21 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
+
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cur.execute("SELECT * FROM student WHERE email=%s AND password=%s",
-                    (email, password))
+        cur.execute("SELECT * FROM student WHERE email=%s AND password=%s", (email, password))
         user = cur.fetchone()
 
         if user:
+            if not user['is_verified']:
+                flash("Your account is not verified. Please check your email and verify your account before logging in.")
+                return redirect('/login')
             session['student_id'] = user['student_id']
             session['student_name'] = user['full_name']
             return redirect('/student/dashboard')
         else:
             flash("Invalid email or password")
-            return redirect('/')
+            return redirect('/login')
 
     return render_template('login.html')
 
@@ -247,6 +278,29 @@ def admin_view_students():
     cur.execute("SELECT * FROM student ORDER BY full_name ASC")
     students = cur.fetchall()
     return render_template('admin_students.html', students=students)
+
+
+# ---------------- EMAIL VERIFICATION ROUTE ----------------
+@app.route('/verify/<token>')
+def verify_email(token):
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute("SELECT * FROM student WHERE verification_token=%s", (token,))
+    user = cur.fetchone()
+
+    if user:
+        if user['is_verified']:
+            flash("Your account is already verified.")
+        else:
+            cur.execute(
+                "UPDATE student SET is_verified=1, verification_token=NULL WHERE student_id=%s",
+                (user['student_id'],)
+            )
+            mysql.connection.commit()
+            flash("Your account is verified! You can now login.")
+        return redirect('/login')
+
+    flash("Invalid or expired verification link.")
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
