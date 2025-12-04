@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,25 +10,82 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        body {
+background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+    }
+        .shine-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-button::before {
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+        }
+        .ms-auto a {
+            color: #8b1010;
+            font-size: 0.92rem;
+           
+
+            margin-right: 15px;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -80px;
+            }
+
+            40%{
+                left: calc(100% + 20px);
+            }
+            100% {
+                left: calc(100% + 20px);
+            }
+        }
+
+        .button-green {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(67, 233, 123, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .button-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(67, 233, 123, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .shadow{
+            background-color: inherit;
+            border: 2px white solid;
+            backdrop-filter: blur(10px);
+        }
+
         .card-hover:hover {
             transform: scale(1.02);
             transition: 0.2s;
         }
     </style>
 </head>
+
 <body class="bg-light">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success px-3">
         <a class="navbar-brand" href="#">Student Portal</a>
 
         <div class="ms-auto">
-             <a href="{{ url_for('apply_leave') }}" class="btn btn-light btn-sm">Apply Leave</a> 
-<a href="{{ url_for('my_leaves') }}" class="btn btn-light btn-sm">View Leave Requests</a> 
-<a href="{{ url_for('student_profile') }}" class="btn btn-light btn-sm">My Profile</a> 
+            <a href="{{ url_for('apply_leave') }}" class="btn shine-button button-green btn-sm mx-2">Apply Leave</a>
+            <a href="{{ url_for('my_leaves') }}" class="btn shine-button button-green btn-sm mx-2">View Leave Requests</a>
+            <a href="{{ url_for('student_profile') }}" class="btn shine-button button-green btn-sm mx-2">My Profile</a>
 
-         
-            <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+
+            <a href="/logout" class="btn shine-button button-green btn-sm mx-3">Logout</a>
         </div>
     </nav>
 
@@ -75,4 +133,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
