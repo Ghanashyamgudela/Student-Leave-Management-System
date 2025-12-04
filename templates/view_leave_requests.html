@@ -9,8 +9,63 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        body{
+            background-image: linear-gradient(to top, #dbdcd7 0%, #dddcd7 24%, #e2c9cc 30%, #e7627d 46%, #b8235a 59%, #801357 71%, #3d1635 84%, #1c1a27 100%);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .shine-button {
+            position: relative;
+            overflow: hidden !important;
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 12px;
+            padding: 8px 24px;
+            min-width: 120px;
+            text-align: center;
+        }
+        .shine-button::before {
+            pointer-events: none;
+            border-radius: 12px;
+            content: '';
+            position: absolute;
+            height: 250%;
+            width: 40px;
+            top: 0;
+            left: -60px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateY(-35%);
+            animation: shine 3s ease infinite;
+        }
+        @keyframes shine {
+            0% { left: -80px; }
+            40%,100% { left: calc(100% + 20px); }
+        }
+        .button-purple {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(142,45,226,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .button-purple:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(142,45,226,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
         .table-hover tbody tr:hover {
             background-color: #f2f2f2;
+        }
+        .container h3 {
+            color: #fff;
+            
+        }
+        .shadow{
+            background-color: inherit;
+             background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border: 2px white solid;
+            backdrop-filter: blur(10px)
+            ;color: white;
         }
     </style>
 </head>
@@ -19,9 +74,9 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         <a class="navbar-brand" href="/admin/dashboard">Admin Panel</a>
-        <div class="ms-auto">
+        <div class="m-3">
             
-            <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+            <a href="/logout" class="shine-button button-purple btn-sm" style="text-decoration: none ; border-radius: 2% ; width: 10px; text-align: center; margin-left: 1100px;">Logout</a>
         </div>
     </nav>
 
@@ -77,7 +132,7 @@
                 </tbody>
             </table>
 
-            <a href="/admin/dashboard" class="btn btn-secondary mt-2">Back to Dashboard</a>
+            <a href="/admin/dashboard" class="btn shine-button button-purple mt-2">Back to Dashboard</a>
 
         </div>
 
